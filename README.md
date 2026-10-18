@@ -52,11 +52,16 @@ Project docs: `EXISTING_SITE_AUDIT.md`, `MARKET_RESEARCH.md`, `DESIGN_PROPOSAL.m
 - **Photos:** the office photos and team banner were supplied by KUDUY. The doctor portraits come from dentalestheticsboston.com/meet-the-team and are the practice's own images; get the practice's permission before using them anywhere public.
 - **Credentials:** Tufts University and Boston University faculty profiles, and the practice's own website.
 
-## Logo (concept refresh)
-The logo is a double-ring seal with a light italic serif "DE" monogram, beside the "Dental Esthetics Boston" wordmark in Newsreader Light and the "Hirayama & Papaspyridakos" line in tracked Public Sans. The two rings nod to the practice's current double-arch mark.
+## Logo: Twin Arch (concept refresh)
+The symbol is a tooth drawn from two true semicircular arches: two specialists, one standard. It keeps the practice's existing double-arch heritage. A finer inner double arch is inset 4 units inside the crown. The wordmark is DENTAL ESTHETICS in tracked Newsreader capitals, BOSTON between hairline rules, and *Hirayama & Papaspyridakos* in italic.
 
-- **Files** (`assets/logo/`): `logo-horizontal`, `logo-stacked` and `mark`, each also as a `-light` version for dark backgrounds, plus `favicon.svg` (a solid navy seal for small sizes).
+- **Files** (, each with a  version for dark backgrounds):
+  - : the full lockup
+  - : for the site header; no subtitle, larger BOSTON, legible at about 28–40px tall
+  - : used in the footer
+  - : the symbol only
+- **Favicon:** , a navy tile with a single-line tooth so it survives 16px.
 - **Outlined text:** all SVG text is converted to vector outlines, so the files render correctly without the fonts installed.
-- **PNG exports:** `logo-horizontal@2x.png`, `logo-horizontal-light@2x.png`, `logo-stacked@2x.png`, `mark-512.png` and `apple-touch-icon.png`.
-- **Regenerating:** run `python scripts/make_logo.py .`. It needs `pip install fonttools brotli uharfbuzz`.
+- **PNG exports:** , , , ,  and .
+- **Regenerating:** run wrote 9 SVGs to assetslogo. It needs Defaulting to user installation because normal site-packages is not writeable. The shared outlining helpers are in .
 - **Status:** this is a proposal for the practice. Their registered logo is unchanged until they approve it.
