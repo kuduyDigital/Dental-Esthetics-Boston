@@ -1,0 +1,277 @@
+@import "tailwindcss";
+@import "lenis/dist/lenis.css";
+
+@font-face {
+  font-family: "Newsreader";
+  src: url("../assets/fonts/newsreader-latin-wght-normal.woff2") format("woff2");
+  font-weight: 200 800;
+  font-style: normal;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Newsreader";
+  src: url("../assets/fonts/newsreader-latin-wght-italic.woff2") format("woff2");
+  font-weight: 200 800;
+  font-style: italic;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Public Sans";
+  src: url("../assets/fonts/public-sans-latin-400-normal.woff2") format("woff2");
+  font-weight: 400;
+  font-display: swap;
+}
+@font-face {
+  font-family: "Public Sans";
+  src: url("../assets/fonts/public-sans-latin-600-normal.woff2") format("woff2");
+  font-weight: 600;
+  font-display: swap;
+}
+
+/* Gallery White: paper walls, near-black type, the practice's navy as the only accent */
+@theme {
+  --color-paper: #faf9f6;
+  --color-wall: #f1efea;
+  --color-ink: #121820;
+  --color-graphite: #5e656c;
+  --color-rule: #e4e1da;
+  --color-navy: #1f3a56;
+  --color-fog: #a9b0b6;
+
+  --font-display: "Newsreader", "Iowan Old Style", Georgia, serif;
+  --font-sans: "Public Sans", ui-sans-serif, system-ui, sans-serif;
+
+  --ease-gallery: cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+@layer base {
+  html {
+    scroll-padding-top: 6rem;
+    -webkit-text-size-adjust: 100%;
+  }
+  body {
+    @apply bg-paper text-ink font-sans antialiased;
+    font-size: 1rem;
+    line-height: 1.65;
+  }
+  ::selection {
+    @apply bg-ink text-paper;
+  }
+  :focus-visible {
+    outline: 1.5px solid currentColor;
+    outline-offset: 4px;
+  }
+}
+
+@utility wrap {
+  @apply mx-auto w-full max-w-[1440px] px-5 sm:px-8 lg:px-14;
+}
+/* Small caps-style wall label: used sparingly (nav, captions, labels) */
+@utility label {
+  @apply text-[0.7rem] font-semibold uppercase tracking-[0.2em];
+}
+@utility display {
+  @apply font-display font-[300] tracking-[-0.03em];
+}
+@utility link-line {
+  background: linear-gradient(currentColor, currentColor) 0 100% / 100% 1px no-repeat;
+  transition: background-size 0.6s var(--ease-gallery);
+  padding-bottom: 2px;
+  &:hover {
+    background-size: 0% 1px;
+    background-position: 100% 100%;
+  }
+}
+@utility btn {
+  @apply inline-flex min-h-13 items-center gap-4 bg-navy pl-7 pr-2 text-[0.92rem] font-semibold text-paper transition-colors duration-500;
+  &:hover {
+    @apply bg-ink;
+  }
+  & .btn-arrow {
+    @apply inline-flex size-9 items-center justify-center overflow-hidden bg-paper/10;
+  }
+  & .btn-arrow span {
+    transition: transform 0.6s var(--ease-gallery);
+  }
+  &:hover .btn-arrow span {
+    transform: translateX(3px);
+  }
+}
+
+/* Header: hides on scroll down, returns on scroll up or focus */
+.site-header {
+  transition:
+    transform 0.6s var(--ease-gallery),
+    background-color 0.4s;
+}
+.site-header[data-scrolled] {
+  @apply bg-paper/92 backdrop-blur-md;
+  box-shadow: 0 1px 0 var(--color-rule);
+}
+.site-header[data-hidden]:not(:focus-within) {
+  transform: translateY(-100%);
+}
+
+/* Normal-intensity motion. Everything is visible without JS or with reduced motion. */
+@media (prefers-reduced-motion: no-preference) {
+  .js [data-reveal] {
+    opacity: 0;
+    transform: translateY(24px);
+    transition:
+      opacity 1s var(--ease-gallery),
+      transform 1.2s var(--ease-gallery);
+    transition-delay: calc(var(--d, 0) * 100ms);
+  }
+  .js [data-reveal].is-in {
+    opacity: 1;
+    transform: none;
+  }
+
+  /* Line-by-line headline reveal */
+  .js [data-reveal="lines"] {
+    opacity: 1;
+    transform: none;
+  }
+  .js [data-reveal="lines"] .line > span {
+    transform: translateY(110%);
+    transition: transform 1.3s var(--ease-gallery);
+    transition-delay: calc(var(--i, 0) * 110ms + var(--d, 0) * 100ms);
+  }
+  .js [data-reveal="lines"].is-in .line > span {
+    transform: none;
+  }
+
+  /* Image mask wipe + settle. Clip a child: a clipped IO target never intersects. */
+  .js [data-reveal="img"] {
+    opacity: 1;
+    transform: none;
+  }
+  .js [data-reveal="img"] .mask {
+    clip-path: inset(100% 0 0 0);
+    transition: clip-path 1.4s var(--ease-gallery);
+    transition-delay: calc(var(--d, 0) * 100ms);
+  }
+  .js [data-reveal="img"] img {
+    transform: scale(1.15);
+    transition: transform 2s var(--ease-gallery);
+    transition-delay: calc(var(--d, 0) * 100ms);
+  }
+  .js [data-reveal="img"].is-in .mask {
+    clip-path: inset(0 0 0 0);
+  }
+  .js [data-reveal="img"].is-in img {
+    transform: none;
+  }
+
+  /* Hero photo: never hidden (protects LCP), only settles */
+  .hero-img {
+    animation: settle 2.2s var(--ease-gallery) both;
+  }
+  @keyframes settle {
+    from {
+      transform: scale(1.08);
+    }
+  }
+}
+
+.line {
+  display: block;
+  overflow: hidden;
+  /* room for descenders inside the clip */
+  padding-bottom: 0.12em;
+  margin-bottom: -0.12em;
+}
+.line > span {
+  display: inline-block;
+}
+
+/* Parallax layer: oversized so movement never shows an edge */
+[data-parallax] > * {
+  will-change: transform;
+}
+@media (prefers-reduced-motion: no-preference) {
+  .js [data-parallax] > * {
+    scale: 1.12;
+  }
+}
+
+/* Testimonial slider: native scroll-snap track, so touch swipe and keyboard work for free */
+.slider-track {
+  @apply flex gap-10 overflow-x-auto;
+  scroll-snap-type: x mandatory;
+  scrollbar-width: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
+}
+@media (prefers-reduced-motion: no-preference) {
+  .slider-track {
+    scroll-behavior: smooth;
+  }
+}
+.slide {
+  @apply flex shrink-0 basis-full flex-col justify-between;
+  scroll-snap-align: start;
+}
+.slide-quote {
+  @apply font-display text-[clamp(2rem,3.6vw,3.6rem)] font-[300] leading-[1.1] tracking-[-0.02em];
+}
+.slide-by {
+  @apply mt-10 text-[0.9rem] text-graphite;
+}
+.slider-btn {
+  @apply inline-flex size-14 items-center justify-center rounded-full border border-ink/25 text-[1.1rem] transition-colors duration-500;
+  &:hover:not(:disabled) {
+    @apply border-ink bg-ink text-paper;
+  }
+  &:disabled {
+    @apply cursor-default opacity-30;
+  }
+}
+.stars {
+  @apply block text-[1rem] tracking-[0.15em] text-ink;
+}
+
+/* Treatment cards on the dark room */
+.card {
+  @apply flex h-full flex-col p-7 transition-colors duration-500 sm:min-h-[22rem] sm:p-10;
+  &:hover,
+  &:focus-visible {
+    background-color: #1a222c;
+  }
+}
+.card-icon {
+  @apply inline-flex size-14 items-center justify-center rounded-full border border-paper/25 text-paper;
+  transition:
+    background-color 0.5s,
+    color 0.5s,
+    border-color 0.5s;
+  & svg {
+    @apply size-7;
+    fill: none;
+    stroke: currentColor;
+    stroke-width: 1.15;
+    stroke-linecap: round;
+    stroke-linejoin: round;
+  }
+}
+.card:hover .card-icon,
+.card:focus-visible .card-icon {
+  @apply border-paper bg-paper text-ink;
+}
+.card-title {
+  @apply mt-7 sm:mt-14 font-display text-[1.9rem] font-[300] leading-tight tracking-[-0.02em];
+}
+.card-text {
+  @apply mt-3 text-[0.95rem] text-fog;
+}
+.card-more {
+  @apply label mt-auto inline-flex items-center gap-2 pt-6 sm:pt-8 text-paper;
+  & span {
+    transition: transform 0.6s var(--ease-gallery);
+  }
+}
+.card:hover .card-more span,
+.card:focus-visible .card-more span {
+  transform: translateX(4px);
+}
