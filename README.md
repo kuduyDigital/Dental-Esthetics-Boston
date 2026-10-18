@@ -51,3 +51,12 @@ Project docs: `EXISTING_SITE_AUDIT.md`, `MARKET_RESEARCH.md`, `DESIGN_PROPOSAL.m
 - **Build tools only:** tailwindcss and @tailwindcss/cli 4.x; sharp (one-time image conversion).
 - **Photos:** the office photos and team banner were supplied by KUDUY. The doctor portraits come from dentalestheticsboston.com/meet-the-team and are the practice's own images; get the practice's permission before using them anywhere public.
 - **Credentials:** Tufts University and Boston University faculty profiles, and the practice's own website.
+
+## Logo (concept refresh)
+The logo is a double-ring seal with a light italic serif "DE" monogram, beside the "Dental Esthetics Boston" wordmark in Newsreader Light and the "Hirayama & Papaspyridakos" line in tracked Public Sans. The two rings nod to the practice's current double-arch mark.
+
+- **Files** (`assets/logo/`): `logo-horizontal`, `logo-stacked` and `mark`, each also as a `-light` version for dark backgrounds, plus `favicon.svg` (a solid navy seal for small sizes).
+- **Outlined text:** all SVG text is converted to vector outlines, so the files render correctly without the fonts installed.
+- **PNG exports:** `logo-horizontal@2x.png`, `logo-horizontal-light@2x.png`, `logo-stacked@2x.png`, `mark-512.png` and `apple-touch-icon.png`.
+- **Regenerating:** run `python scripts/make_logo.py .`. It needs `pip install fonttools brotli uharfbuzz`.
+- **Status:** this is a proposal for the practice. Their registered logo is unchanged until they approve it.
