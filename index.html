@@ -44,24 +44,43 @@
 <body class="pb-16 md:pb-0">
   <a href="#main" class="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[60] focus:bg-ink focus:px-5 focus:py-3 focus:text-paper">Skip to content</a>
 
-  <!-- Header: nav left, wordmark centred, actions right -->
+  <!-- Header: utility bar (desktop) + split navigation around the centred logo -->
   <header class="site-header fixed inset-x-0 top-0 z-50">
-    <div class="wrap flex h-20 items-center justify-between gap-6 lg:grid lg:grid-cols-[1fr_auto_1fr]">
+    <div class="utility hidden overflow-hidden border-b border-rule lg:block">
+      <div class="wrap flex h-9 items-center justify-between text-[0.75rem] text-graphite">
+        <p>745 Boylston St, Suite 403 <span class="mx-2 text-rule" aria-hidden="true">|</span> Back Bay, Boston</p>
+        <p class="flex items-center gap-2">
+          <span>Tuesday – Thursday, 8:00 am – 5:00 pm</span>
+          <span class="mx-2 text-rule" aria-hidden="true">|</span>
+          <a class="link-line font-semibold text-ink" href="tel:+16175363054">(617) 536-3054</a>
+        </p>
+      </div>
+    </div>
+
+    <div class="bar wrap flex items-center justify-between gap-6 lg:grid lg:grid-cols-[1fr_auto_1fr]">
       <nav aria-label="Primary" class="hidden lg:block">
-        <ul class="label flex gap-6 whitespace-nowrap xl:gap-8">
-          <li><a class="link-line [background-size:0%_1px] hover:[background-size:100%_1px] hover:[background-position:0_100%]" href="#specialists">Specialists</a></li>
-          <li><a class="link-line [background-size:0%_1px] hover:[background-size:100%_1px] hover:[background-position:0_100%]" href="#treatments">Treatments</a></li>
-          <li><a class="link-line [background-size:0%_1px] hover:[background-size:100%_1px] hover:[background-position:0_100%]" href="#practice">The practice</a></li>
+        <ul class="label flex gap-7 whitespace-nowrap 2xl:gap-9">
+          <li><a class="nav-link" href="#specialists">Specialists</a></li>
+          <li><a class="nav-link" href="#treatments">Treatments</a></li>
+          <li class="hidden xl:list-item"><a class="nav-link" href="#results">Results</a></li>
+          <li class="hidden xl:list-item"><a class="nav-link" href="#reviews">Reviews</a></li>
         </ul>
       </nav>
 
       <a href="#top" class="block leading-none lg:col-start-2 lg:justify-self-center" aria-label="Dental Esthetics Boston, back to top">
-        <img src="assets/logo/logo-compact.svg" width="384" height="52" alt="Dental Esthetics Boston — Hirayama &amp; Papaspyridakos" class="h-7 w-auto sm:h-10">
+        <img src="assets/logo/logo-compact.svg" width="384" height="52" alt="Dental Esthetics Boston — Hirayama &amp; Papaspyridakos" class="header-logo h-7 w-auto sm:h-10">
       </a>
 
-      <div class="flex items-center justify-end gap-6 lg:col-start-3">
-        <a href="tel:+16175363054" class="label hidden md:inline">(617) 536-3054</a>
-        <a href="https://www.dentalestheticsboston.com/contact-us" class="label link-line hidden sm:inline">Book a consultation</a>
+      <div class="flex items-center justify-end gap-6 lg:col-start-3 2xl:gap-9">
+        <nav aria-label="The practice" class="hidden lg:block">
+          <ul class="label flex gap-7 whitespace-nowrap 2xl:gap-9">
+            <li class="hidden xl:list-item"><a class="nav-link" href="#practice">The practice</a></li>
+            <li><a class="nav-link" href="#visit">Visit</a></li>
+          </ul>
+        </nav>
+        <a href="tel:+16175363054" class="label hidden md:inline lg:hidden">(617) 536-3054</a>
+        <a href="https://www.dentalestheticsboston.com/contact-us" class="label link-line hidden sm:inline lg:hidden">Book a consultation</a>
+        <a href="https://www.dentalestheticsboston.com/contact-us" class="btn hidden min-h-11 gap-3 whitespace-nowrap pl-5 pr-1.5 text-[0.82rem] lg:inline-flex">Book a consultation <span class="btn-arrow size-8" aria-hidden="true"><span>→</span></span></a>
         <button type="button" class="label inline-flex h-11 items-center gap-3 lg:hidden" aria-expanded="false" aria-controls="mobile-menu" data-menu-toggle>
           <span data-menu-label>Menu</span>
           <svg width="22" height="10" viewBox="0 0 22 10" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.25"><path d="M0 2h22M0 8h22"/></svg>
@@ -87,7 +106,7 @@
 
   <main id="main">
     <!-- Hero: split banner, headline left, team photo bleeding to the right edge -->
-    <section id="top" aria-labelledby="hero-title" class="pt-20">
+    <section id="top" aria-labelledby="hero-title" class="pt-20 lg:pt-[7.25rem]">
       <div class="grid lg:min-h-[min(56rem,calc(100svh-5rem))] lg:grid-cols-12">
         <div class="wrap flex flex-col justify-center pb-16 pt-12 md:pt-16 lg:col-span-6 lg:mx-0 lg:max-w-none lg:py-24 lg:pl-[max(3.5rem,calc((100vw-1440px)/2+3.5rem))] lg:pr-14">
           <p class="label text-graphite" data-reveal>Prosthodontics &amp; implant dentistry — Back Bay, Boston</p>
@@ -543,7 +562,7 @@
 
   <footer class="bg-ink text-paper">
     <div class="wrap pt-20 lg:pt-28">
-      <img src="assets/logo/logo-stacked-light.svg" width="294" height="168" alt="Dental Esthetics Boston — Hirayama &amp; Papaspyridakos" class="h-32 w-auto lg:h-44">
+      <img src="assets/logo/logo-stacked-light.svg" width="294" height="168" alt="Dental Esthetics Boston — Hirayama &amp; Papaspyridakos" class="mx-auto block h-32 w-auto lg:h-44">
       <div class="mt-14 flex flex-col gap-6 border-t border-paper/20 py-8 text-[0.85rem] text-fog md:flex-row md:items-center md:justify-between">
         <p>Hirayama &amp; Papaspyridakos · 745 Boylston St, Suite 403, Boston</p>
         <ul class="flex flex-wrap gap-x-6 gap-y-2">

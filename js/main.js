@@ -65,6 +65,20 @@ if ('IntersectionObserver' in window) {
   items.forEach((el) => el.classList.add('is-in'));
 }
 
+// Scroll-spy: mark the nav link whose section crosses the middle band of the viewport
+const navLinks = [...document.querySelectorAll('.nav-link')];
+const spied = [document.getElementById('top'), ...navLinks.map((a) => document.querySelector(a.getAttribute('href')))].filter(Boolean);
+if ('IntersectionObserver' in window) {
+  const spy = new IntersectionObserver((entries) => {
+    for (const en of entries) {
+      if (!en.isIntersecting) continue;
+      const id = `#${en.target.id}`;
+      navLinks.forEach((a) => a.setAttribute('aria-current', a.getAttribute('href') === id));
+    }
+  }, { rootMargin: '-45% 0px -50% 0px' });
+  spied.forEach((s) => spy.observe(s));
+}
+
 // Testimonial slider: buttons drive the native scroll-snap track; state follows the scroll position
 for (const slider of document.querySelectorAll('[data-slider]')) {
   const track = slider.querySelector('[data-slider-track]');

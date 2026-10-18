@@ -111,6 +111,47 @@
 .site-header[data-hidden]:not(:focus-within) {
   transform: translateY(-100%);
 }
+/* Desktop: utility bar collapses and the main bar tightens once the page scrolls */
+.site-header .utility {
+  height: 2.25rem;
+  transition:
+    height 0.5s var(--ease-gallery),
+    border-color 0.5s;
+}
+.site-header[data-scrolled] .utility {
+  height: 0;
+  border-color: transparent;
+}
+.site-header .bar {
+  height: 5rem;
+  transition: height 0.5s var(--ease-gallery);
+}
+.site-header .header-logo {
+  transition: height 0.5s var(--ease-gallery);
+}
+@media (min-width: 64rem) {
+  .site-header[data-scrolled] .bar {
+    height: 4.25rem;
+  }
+  .site-header[data-scrolled] .header-logo {
+    height: 2.15rem;
+  }
+}
+/* Nav links: hairline grows on hover and marks the section in view */
+.nav-link {
+  padding-bottom: 4px;
+  background: linear-gradient(currentColor, currentColor) 0 100% / 0% 1px no-repeat;
+  transition:
+    background-size 0.6s var(--ease-gallery),
+    color 0.3s;
+  &:hover,
+  &[aria-current="true"] {
+    background-size: 100% 1px;
+  }
+  &[aria-current="true"] {
+    @apply text-navy;
+  }
+}
 
 /* Normal-intensity motion. Everything is visible without JS or with reduced motion. */
 @media (prefers-reduced-motion: no-preference) {
